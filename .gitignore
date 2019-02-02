@@ -1,0 +1,16 @@
+*.pyc
+dist/*
+build/*
+*.egg-info
+
+# test-related
+.cache
+.pytest_cache
+
+# developer environments
+.idea
+.project
+.pydevproject
+
+# docs
+docs/_build

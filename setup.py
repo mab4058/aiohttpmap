@@ -5,7 +5,7 @@ version = '0.1.0'
 
 setup(name='aiohttpmap',
       version=version,
-      description='Asynchronously handle bulk requests.',
+      description='Asynchronously handle bulk http requests.',
       author='Michael Bayer',
       author_email='mab4058@gmail.com',
       license='MIT',

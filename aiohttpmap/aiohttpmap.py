@@ -87,7 +87,7 @@ class AiohttpMap:
 
     async def _handle_request(self, url, request_type, session, **kwargs):
         """
-        Handles an individual request.
+        Handles individual requests.
 
         Args:
             url (str): Request URL.

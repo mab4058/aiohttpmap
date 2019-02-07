@@ -22,7 +22,7 @@ class AiohttpMap:
         self._success_queue = None
         self._error_queue = None
 
-    def map(self, urls, request_type='get', **kwargs):
+    async def map(self, urls, request_type='get', **kwargs):
         """
         Performs the given request type on urls.
 
@@ -41,8 +41,7 @@ class AiohttpMap:
         self._success_queue = asyncio.Queue()
         self._error_queue = asyncio.Queue()
 
-        loop = asyncio.get_event_loop()
-        loop.run_until_complete(self._map(urls, request_type, **kwargs))
+        await self._map(urls, request_type, **kwargs)
 
         succeeded = self._get_all_items(self._success_queue)
         failed = self._get_all_items(self._error_queue)

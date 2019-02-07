@@ -42,8 +42,7 @@ class AiohttpMap:
         self._error_queue = asyncio.Queue()
 
         loop = asyncio.get_event_loop()
-        future = self._map(urls, request_type, **kwargs)
-        loop.run_until_complete(future)
+        loop.run_until_complete(self._map(urls, request_type, **kwargs))
 
         succeeded = self._get_all_items(self._success_queue)
         failed = self._get_all_items(self._error_queue)
@@ -77,13 +76,12 @@ class AiohttpMap:
         Gathers all the tasks.
 
         """
-        futures = []
+        tasks = []
         async with aiohttp.ClientSession(**self._session_parameters) as session:
             for url in urls:
-                future = asyncio.ensure_future(
-                    self._handle_request(url, request_type, session, **kwargs))
-                futures.append(future)
-            _ = await asyncio.gather(*futures)
+                tasks.append(asyncio.ensure_future(
+                    self._handle_request(url, request_type, session, **kwargs)))
+            await asyncio.gather(*tasks)
 
     async def _handle_request(self, url, request_type, session, **kwargs):
         """
